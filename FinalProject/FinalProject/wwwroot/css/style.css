@@ -1,0 +1,235 @@
+nav ul a,
+nav .brand-logo {
+  color: #444;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.sidenav-trigger {
+  color: #26a69a;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+  .parallax-container .section {
+    width: 100%;
+  }
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
+}
+
+
+.searchSection{
+  background-image: url('../images/background1.png'); background-position-y: -50px;
+}
+
+.recommendationsSection {
+    background-image: url('../images/background3.jpg');
+    background-position-y: -50px;
+}
+.spacer {
+  background-color:black;
+  height:1px;
+  width: 100%;
+}
+
+.registerStudent{
+  background-color: grey;
+}
+
+.loginSection {
+  height: 60px;
+}
+
+.loginSectionSmall {
+  height: 200px;
+}
+
+.myinput {
+  width: 90px;
+  height: 30px;
+}
+
+.myinputSmall {
+  width: 100%;
+  height: 30px;
+}
+
+.searchProfileImage {
+
+  border: 5px solid white;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.16), 0px 3px 6px rgba(0,0,0,0.23);
+}
+
+.item {
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.16), 0px 3px 6px rgba(0,0,0,0.23);
+}
+
+.searchResult {
+  padding-top:10px;
+  padding-bottom: 7px;
+}
+
+.studentsList{
+  width:300px;
+  padding-bottom:1px;
+  overflow-x:hidden;
+  overflow-y:visible;
+  max-height: 600px;
+}
+
+.studentCardText {
+  position: relative;top:5px; line-height: 20px;
+}
+.studentCardHeight{
+  height: 60px;
+}
+.studentCardImg{
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+  position: relative;
+  top:5px;
+}
+
+.chatImg{
+  width:30px;
+  height:30px;
+  border-radius: 50%;
+}
+
+.messageContainer {
+  width:100%;
+  position:fixed;
+  bottom:0px;
+  z-index:10;
+  padding:50px;
+  padding-top:500px;
+  padding-bottom:100px;
+  display:none;
+}
+
+.messageBox {
+  width:90%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color:#fff3e0;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #a1887f;
+}
+
+.closeButton {
+  position:relative;
+   top:-5px;
+   left:0px;
+   color:black;
+   float:right;
+   height:30px;
+   width:30px;
+}
+
+/* Card Flashes */
+
+.holdCards {
+
+  position:relative;
+  height:250px;
+  margin-bottom:30px; 
+}
+.holdCards2 {
+
+  position:relative; 
+  height:250px;
+  margin-bottom:30px; 
+}
+
+.holdCards3 {
+
+  position:relative; 
+  height:250px;
+  margin-bottom:30px; 
+}
+
+.floatingCard{
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+  padding: 0px 20px 20px 20px;
+  min-height: 250px;
+}
+
+.cardLink {
+  color:orange;
+  margin-right:10px;
+}
+
+
+/* Calendar */
+
+.calendarContainer{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+}
+
+/*.calendarCol {
+ 
+}*/
+
+.calendarCol > div {
+  border: 1px solid #ff9800;
+  text-align: center;
+  padding:3px;
+}
+
+.calendarTitle{
+  background-color:#ffb74d;
+}
+
+.calendarDisabled{
+  background-color: #efebe9;
+}
+
+.calendarAvailable{
+  background-color: #ffd180;
+  cursor: pointer;
+}
+.calendarAvailable:hover {
+  background-color: #ffb74d;
+  cursor: pointer;
+}
+
+.calendarTaken {
+  background-color: #e65100;
+  cursor:pointer;
+}

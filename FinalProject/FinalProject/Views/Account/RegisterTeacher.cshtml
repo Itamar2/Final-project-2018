@@ -1,0 +1,141 @@
+﻿@model FinalProject.models.ViewModels.TeacherRegViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Register A Teacher";
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+
+
+
+<!----------------------------------------------------------------------Teacher Registration-->
+<div class="section registerStudent brown lighten-5">
+    <div class="container">
+        <h4 class="center-align">Teacher Registration</h4>
+        <div class="spacer"></div>
+        <br />
+        <form method="#">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="User_Name" type="text" asp-for="UserName" class="validate">
+                    <label for="User_Name">User Name</label>
+                </div>
+             </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type="text" asp-for="FirstName" class="validate">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" asp-for="LastName" class="validate">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="age" type="text" asp-for="Age" class="validate">
+                        <label for="age">Age</label>
+                    </div>
+                    <div class="col s6" style="padding-top: 15px;">
+                        <select asp-for="Gen">
+                            <option value="" selected disabled>Gender:</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <select>
+                            <option value="" selected disabled>City:</option>
+                            <option value="volvo">Yavne</option>
+                            <option value="saab">Tel Aviv</option>
+                            <option value="opel">Ramat Gan</option>
+                            <option value="audi">Holon</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <select>
+                            <option value="" selected disabled>Education:</option>
+                            <option value="opel">None</option>
+                            <option value="volvo">High School</option>
+                            <option value="saab">Academic</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="text" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="pass" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="repass" type="password" class="validate">
+                        <label for="repass">Re-Enter Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="file-field input-field">
+                        <div class="btn right">
+                            <span>Browse</span>
+                            <input type="file" />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload Profile Picture" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select multiple>
+                            <option value="" disabled selected>Areas of teaching</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="seniority" type="password" class="validate">
+                        <label for="seniority">Seniority</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <label for="textarea1">About me:</label>
+                    </div>
+                </div>
+                <h5>Prefrences: </h5>
+                <div class="row">
+                    <div class="col s6">
+                        <p class="range-field">
+                            Distance:
+                            <input type="range" id="test5" min="0" max="10" />
+                        </p>
+                    </div>
+                    <div class="col s6">
+                        <p class="range-field">
+                            Student Ranking:
+                            <input type="range" id="test5" min="0" max="10" />
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <a href="#" id="registerStudent" class="btn-large waves-effect waves-light teal lighten-1">Register</a>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>

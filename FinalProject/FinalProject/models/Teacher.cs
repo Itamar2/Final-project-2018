@@ -14,6 +14,6 @@ namespace FinalProject.models
         public int StudentRanking { get; set; }
         public string AppId { get; set; }
         [ForeignKey("AppId")]
-        public ApplicationUser AppUser { get; set; }
+        public virtual ApplicationUser AppUser { get; set; }
     }
 }

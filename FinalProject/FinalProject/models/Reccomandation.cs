@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FinalProject.models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,8 +15,8 @@ namespace FinalProject.Models
         public DateTime Time { get; set; }
         public string AppId { get; set; }
         [ForeignKey("AppId")]
-        public ApplicationUser Sender { get; set; }
-        public ApplicationUser Reciver { get; set; }
+        public virtual ApplicationUser Sender { get; set; }
+        public virtual ApplicationUser Reciver { get; set; }
         [ForeignKey("AppId")]
         public RecType RecType { get; set; }
     }

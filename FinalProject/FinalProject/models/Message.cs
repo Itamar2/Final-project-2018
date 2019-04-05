@@ -10,12 +10,12 @@ namespace FinalProject.models
     public class Message
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
         public DateTime Date { get; set; }
         [ForeignKey("SenderId")]
-        public ApplicationUser Sender { get; set; }
+        public virtual ApplicationUser Sender { get; set; }
         [ForeignKey("RecId")]
-        public ApplicationUser Recv { get; set; }
+        public virtual ApplicationUser Recv { get; set; }
         public int SenderId { get; set; }
         public int RecId { get; set; }
         public bool IsRead { get; set; }

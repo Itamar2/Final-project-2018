@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using FinalProject.Models.Teacher;
+using FinalProject.models;
 
 namespace FinalProject.Models
 {
     public class Course
     {
-        [key]
+        [Key]
         public string CourseId { get; set; }
         public double Price { get; set; }
         public string CourseName { get; set; }
@@ -17,7 +19,7 @@ namespace FinalProject.Models
         //silabus- how to implement
         public string Tid { get; set; }
         [ForeignKey("Tid")]
-        public Teacher Teacher { get; set; }
-        public List<Course> Courses { get; set; }
+        public virtual Teacher Teacher { get; set; }
+        public virtual List<Course> Courses { get; set; }
     }
 }
