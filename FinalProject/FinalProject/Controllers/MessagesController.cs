@@ -23,8 +23,20 @@ namespace FinalProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult SendMessage(string id)
+        public async Task<IActionResult> SendMessage(string id)
         {
+            ApplicationUser OtherUser = await UserManager.FindByIdAsync(id);
+            string UserName = User.Identity.Name;
+            ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
+
+            Message msg = new Message()
+            {
+                Date = DateTime.Now,
+                Content = null,
+                RecId = OtherUser.Id,
+                SenderId = MyUser.Id,
+                IsRead = false
+            };
             return null;
         }
     }
