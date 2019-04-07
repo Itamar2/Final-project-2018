@@ -1,0 +1,164 @@
+﻿@model IEnumerable<FinalProject.Models.Teacher>
+
+
+
+
+<h1>Total: @Model.Count()</h1>
+
+<!----------------------------------------------------------------------Search Section---->
+<div class="section searchSection">
+    <div class="container">
+        <br><br>
+        <h1 class="header center orange-text lighten-1" style="text-shadow: 2px 2px #453004;">Find your teacher</h1>
+        <div class="row brown lighten-5 z-depth-4" style="padding:10px;">
+            <form action="#">
+                <div class="col l2 s6" style="padding-top:10px;">
+                    <label>
+                        <input name="group1" type="radio" checked />
+                        <span class="brown-text">Private Lesson</span>
+                    </label>
+                </div>
+                <div class="col l2 s6" style="padding-top:10px;">
+                    <label>
+                        <input name="group1" type="radio" />
+                        <span class="brown-text">Group Lesson</span>
+                    </label>
+                </div>
+                <div class="col l2 s12">
+                    <select>
+                        <option value="volvo" selected disabled>Area:</option>
+                        <option value="volvo">Yavne</option>
+                        <option value="saab">Tel Aviv</option>
+                        <option value="opel">Ramat Gan</option>
+                        <option value="audi">Holon</option>
+                    </select>
+                </div>
+                <div class="col l2 s12">
+                    <select>
+                        <option value="volvo" selected disabled>Category:</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                    </select>
+                </div>
+                <div class="col l2 s12">
+                    <select>
+                        <option value="volvo" selected disabled>Subject:</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                    </select>
+                </div>
+                <div class="col l2 s12">
+                    <select>
+                        <option value="volvo" selected disabled>Level:</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                        <option value="volvo">------</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="row center">
+            <a href="#" id="searchBtn" class="btn-large waves-effect waves-light teal lighten-1">Search</a>
+            <a href="#" id="refineBtn" class="btn-large waves-effect waves-light teal lighten-1">Refine Search</a>
+        </div>
+        <br><br>
+    </div>
+</div>
+<!--------------------------------------------------------------------Advanced Search----------->
+<div class="container refineSearch">
+    <div class="row">
+        <div class="col s6">
+            <p class="range-field">
+                Distance:
+                <input type="range" id="test5" min="0" max="10" />
+            </p>
+        </div>
+        <div class="col s6">
+            <p class="range-field">
+                Price:
+                <input type="range" id="test5" min="0" max="10" />
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <p class="range-field">
+                Teacher Ranking:
+                <input type="range" id="test5" min="0" max="10" />
+            </p>
+        </div>
+        <div class="col s6">
+            <p class="range-field">
+                Number of students the teacher teached:
+                <input type="range" id="test5" min="0" max="10" />
+            </p>
+        </div>
+    </div>
+</div>
+<!--------------------------------------------------------------------Send Message To Teacher-->
+<div class="messageContainer">
+    <div class="container messageBox">
+        <div class="row">
+
+            <div class="input-field col s12">
+                <img src="~/images/close.png" class="closeButton" />
+                <textarea id="textarea1" class="materialize-textarea messageTextArea"></textarea>
+                <label for="textarea1">Write a message:</label>
+                <div class="center-align">
+                    <a class="waves-effect waves-light btn">Send</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--------------------------------------------------------------------Search Results Header----->
+<div class="container" style="padding:20px;">
+    <span style="font-size:18px;">Search Results:</span>
+</div>
+
+<div class="section">
+    @foreach (var teacher in Model)
+    {
+
+        <!------------------------------------------------------------------One Search Result -->
+        <div class="container item">
+            <div class="row grey lighten-5 searchResult" style="margin-bottom: 0px;">
+                <div class="col m3 l3 s12 center-align">
+                    <a href="profile.html">
+                        <img src="~/images/person.jpg"
+                             class="searchProfileImage responsive-img"
+                             style="height:200px;width: 200px;" />
+                    </a>
+                </div>
+                <div class="col m7 l8 s12">
+                    <h6 style="">@(teacher.AppUser.FirstName+" "+teacher.AppUser.LastName)</h6>
+                    <p>
+                        @teacher.AboutMe
+                    </p>
+                </div>
+                <div class="col m2 l1 s12">
+                    <span style="font-size:12px;">Match: 10</span>
+                </div>
+            </div>
+            <div class="row grey lighten-5 " style="padding-bottom:10px;">
+                <div class="col m4 l3 center s6" style="padding-top:5px;padding-bottom:5px;">
+                    <div>
+                        <img src="~/images/message.png" class="messageTeacher" value="teacherId" width="50" />
+                        <img src="~/images/star.png" height="12" />10
+                        Price: 50$
+                    </div>
+                </div>
+                <div class="col m4 l3 push-l6 push-m4 s6">
+                    <div class="right">
+                        <a href="#" id="download-button" class="btn-small left teal lighten-1">Book a Lesson</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

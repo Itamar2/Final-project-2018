@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FinalProject.models
+namespace FinalProject.Models
 {
     public class Message
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         [ForeignKey("SenderId")]
         public virtual ApplicationUser Sender { get; set; }

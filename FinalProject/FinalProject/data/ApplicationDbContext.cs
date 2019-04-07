@@ -1,4 +1,4 @@
-﻿using FinalProject.models;
+﻿using FinalProject.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,12 +12,12 @@ namespace FinalProject.data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=MyFinalProject2019;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=FinPro2019;Trusted_Connection=True;");
             //optionsBuilder.UseLazyLoadingProxies();
         }
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<Message> Messages { get; set; }
+        //public DbSet<Message> Messages { get; set; }
     }
 }

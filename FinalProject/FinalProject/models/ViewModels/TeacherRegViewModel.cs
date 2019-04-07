@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FinalProject.models.ViewModels
+namespace FinalProject.Models.ViewModels
 {
     public class TeacherRegViewModel
     {
@@ -19,5 +19,6 @@ namespace FinalProject.models.ViewModels
         public string ConfirmPassword { get; set; }
         public int Distance { get; set; }
         public int StudentRanking { get; set; }
+        public string AboutMe { get; set; }
     }
 }

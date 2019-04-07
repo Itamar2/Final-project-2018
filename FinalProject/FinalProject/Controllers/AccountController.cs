@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FinalProject.data;
-using FinalProject.models;
-using FinalProject.models.ViewModels;
+using FinalProject.Models;
+using FinalProject.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,15 +59,15 @@ namespace FinalProject.Controllers
 
             
             var result = await UserManager.CreateAsync(myUser, model.Password);
-            var resultRole = await UserManager.AddToRoleAsync(myUser, "student");
+            var resultRole = await UserManager.AddToRoleAsync(myUser, "Student");
 
             if (result.Succeeded)
             {
                 AppDbContext.Students.Add(st);
                 AppDbContext.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("RegisterStudent");
         }
 
         [HttpGet]
@@ -91,18 +91,18 @@ namespace FinalProject.Controllers
                 Distance = model.Distance,
                 Educ = model.Educ
             };
-
-            Teacher teacher = new Teacher()
-            {
-                StudentRanking = model.StudentRanking,
-                AppId = myUser.Id
-            };
-
+            Teacher teacher;
             var result = await UserManager.CreateAsync(myUser, model.Password);
-            await UserManager.AddToRoleAsync(myUser, "teacher");
+            await UserManager.AddToRoleAsync(myUser, "Teacher");
 
             if (result.Succeeded)
             {
+                teacher = new Teacher()
+                {
+                    StudentRanking = model.StudentRanking,
+                    AboutMe = model.AboutMe,
+                    AppId = myUser.Id
+                };
                 AppDbContext.Teachers.Add(teacher);
                 AppDbContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -111,13 +111,13 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogIn(LogInViewModel model)
+        public async Task<IActionResult> LogIn(string UserName,string Password,bool RemeberMe)
         {
-            var result = await SignInMan.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+            var result = await SignInMan.PasswordSignInAsync(UserName,Password,/*model.RememberMe*/false, true);
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("Index");
         }
@@ -125,7 +125,7 @@ namespace FinalProject.Controllers
         public async Task<IActionResult> Logout()
         {
             await SignInMan.SignOutAsync();
-            return RedirectToAction("LogIn");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
