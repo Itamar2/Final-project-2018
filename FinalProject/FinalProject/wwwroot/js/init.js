@@ -48,10 +48,15 @@
 
     $(".messageContainer").hide();
 
-    $(".messageTeacher").click(function(){
-      // $(this).attr("value") - Teacher id to send a message
-      $(".messageContainer").fadeIn();
-    });
+      $(".messageTeacher").click(function () {
+        $(".messageContainer").fadeIn();
+      });
+
+      $("#sendMessageButton").click(function () {
+          $.post("/Messages/SendMessage", { "id": "1", "message": "hey" }, function (data) {
+              alert(data);
+          });
+      });
 
     $(".closeButton").click(function(){
       $(".messageContainer").fadeOut();

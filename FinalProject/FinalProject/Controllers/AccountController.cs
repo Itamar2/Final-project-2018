@@ -123,7 +123,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn(string UserName,string Password,bool RemeberMe)
         {
-            var result = await SignInMan.PasswordSignInAsync(UserName,Password,/*model.RememberMe*/false, true);
+            var result = await SignInMan.PasswordSignInAsync(UserName,Password,/*model.RememberMe*/true, true);
 
             if (result.Succeeded)
             {
