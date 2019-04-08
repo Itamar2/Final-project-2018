@@ -13,7 +13,7 @@ namespace FinalProject.data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=localhost;Database=FinPro2019;Trusted_Connection=True;");
-            //optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         public DbSet<Student> Students { get; set; }

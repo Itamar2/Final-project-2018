@@ -37,6 +37,9 @@ namespace FinalProject.Controllers
                 SenderId = MyUser.Id,
                 IsRead = false
             };
+
+            AppDbContext.Messages.Add(msg);
+            AppDbContext.SaveChanges();
             return null;
         }
     }

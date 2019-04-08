@@ -1,0 +1,102 @@
+﻿@model FinalProject.Models.ApplicationUser
+
+<!----------------------------------------------------------------------Profile-->
+<!--The Profile will show the teacher or student based on user id-->
+<div class="section">
+    <div class="container">
+        <div class="row center-align">
+            <!----------------------------------------------------------------------Image + Send Message + rating-->
+            <div class="col s12 m4 l3">
+                <a href="profile.html">
+                    <img src="~/images/person.jpg"
+                         class="searchProfileImage responsive-img"
+                         style="height:200px;width: 200px;" />
+                </a>
+                <br /><br />
+                <div class="icon-block">
+                    <a href="#" class="btn-small teal lighten-1">Send Message</a>
+                </div>
+                <br />
+                <img src="~/images/star.png" height="12" />10
+            </div>
+            <div class="col s12 m8 l9">
+                <div class="row left-align">
+                    <!----------------------------------------------------------------------About-->
+                    <div class="col s12" style="padding: 0px 30px 10px 30px;">
+                        <h5 class="purple-text lighten-1"><b>@(Model.FirstName+" " + Model.LastName),@(" " + Model.Age),@(" "+Model.City)</b></h5>
+                        <div class="spacer"></div>
+                    </div>
+                    <div class="col s12" style="padding: 30px 30px 10px 30px;">
+                        @Model.Teacher.AboutMe
+                    </div>
+                    <div class="col s12" style="padding: 30px 30px 0px 30px;">
+                        <div class="spacer"></div>
+                        <br />
+                        <b>Education:</b> B.Sc. at Computer Science
+                        <br />
+                        <b>Seniority:</b> 5 years
+                        <br /><br />
+                        <b>Teaches:</b>
+                        <div class="chip teal lighten-1 white-text">Math</div>
+                        <div class="chip teal lighten-1 white-text">Discrete mathematics</div>
+                        <div class="chip teal lighten-1 white-text">C</div>
+                        <div class="chip teal lighten-1 white-text">C++</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------------------------------------Students Recommendations-->
+        <div class="row">
+            <div class="col s12 l12">
+                <h5 class="left-align">
+                    Students Recommendations:
+                </h5>
+            </div>
+            <div class="col s12 l4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Card Title</span>
+                        <p>
+                            I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Card Title</span>
+                        <p>
+                            I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Card Title</span>
+                        <p>
+                            I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

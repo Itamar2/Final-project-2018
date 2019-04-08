@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<FinalProject.Models.Teacher>
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
 
@@ -136,7 +136,7 @@
                     </a>
                 </div>
                 <div class="col m7 l8 s12">
-                    <h6 style="">@(teacher.AppUser.FirstName+" "+teacher.AppUser.LastName)</h6>
+                    <h6 style=""><a asp-controller="Search" asp-action="DisplayProfile" asp-route-id="@teacher.AppId">@(teacher.AppUser.FirstName + " " + teacher.AppUser.LastName)</a></h6>
                     <p>
                         @teacher.AboutMe
                     </p>
