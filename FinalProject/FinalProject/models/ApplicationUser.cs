@@ -17,6 +17,7 @@ namespace FinalProject.Models
         public int Distance { get; set; }
         public virtual Student Student { get; set; }
         public virtual Teacher Teacher { get; set; }
+        public string PicPath { get; set; }
     }
 
     public enum Gender

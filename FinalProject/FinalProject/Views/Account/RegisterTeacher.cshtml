@@ -13,7 +13,7 @@
         <h4 class="center-align">Teacher Registration</h4>
         <div class="spacer"></div>
         <br />
-        <form asp-controller="Account" asp-action="RegisterTeacher">
+        <form asp-controller="Account" asp-action="RegisterTeacher" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-field col s6">
                     <input id="User_Name" type="text" asp-for="UserName" class="validate">
@@ -91,17 +91,17 @@
                     <label for="repass">Re-Enter Password</label>
                 </div>
             </div>
-            @*<div class="row">
+            <div class="row">
                 <div class="file-field input-field">
                     <div class="btn right">
                         <span>Browse</span>
-                        <input type="file" />
+                        <input type="file" asp-for="Pic" />
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text" placeholder="Upload Profile Picture" />
                     </div>
                 </div>
-            </div>*@
+            </div>
             @*<div class="row">
                 <div class="input-field col s12">
                     <select multiple>

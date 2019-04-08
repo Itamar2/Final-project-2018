@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FinalProject.data;
 using FinalProject.Models;
 using FinalProject.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,12 +17,14 @@ namespace FinalProject.Controllers
         UserManager<ApplicationUser> UserManager;
         ApplicationDbContext AppDbContext;
         SignInManager<ApplicationUser> SignInMan;
+        IHostingEnvironment he;
 
-        public AccountController(UserManager<ApplicationUser> UserManager, ApplicationDbContext AppDbContext, SignInManager<ApplicationUser> SignInMan)
+        public AccountController(UserManager<ApplicationUser> UserManager, ApplicationDbContext AppDbContext, SignInManager<ApplicationUser> SignInMan, IHostingEnvironment he)
         {
             this.UserManager = UserManager;
             this.AppDbContext = AppDbContext;
             this.SignInMan = SignInMan;
+            this.he = he;
         }
         public IActionResult Index()
         {
@@ -36,6 +40,8 @@ namespace FinalProject.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterStudent(StudentRegViewModel model)
         {
+            var fileName = Path.Combine(he.WebRootPath, Path.GetFileName(model.Pic.FileName));
+            model.Pic.CopyTo(new FileStream(fileName, FileMode.Create));
             ApplicationUser myUser = new ApplicationUser()
             {
                 UserName = model.UserName,
@@ -46,7 +52,8 @@ namespace FinalProject.Controllers
                 Gen = model.Gen,
                 City = model.City,
                 Distance = model.Distance,
-                Educ = model.Educ
+                Educ = model.Educ,
+                PicPath = fileName
             };
 
             Student st = new Student()
@@ -79,6 +86,8 @@ namespace FinalProject.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterTeacher(TeacherRegViewModel model)
         {
+            var fileName = Path.Combine(he.WebRootPath,Path.GetFileName(model.Pic.FileName));
+            model.Pic.CopyTo(new FileStream(fileName,FileMode.Create));
             ApplicationUser myUser = new ApplicationUser()
             {
                 UserName = model.UserName,
@@ -89,7 +98,8 @@ namespace FinalProject.Controllers
                 Gen = model.Gen,
                 City = model.City,
                 Distance = model.Distance,
-                Educ = model.Educ
+                Educ = model.Educ,
+                PicPath = model.Pic.FileName
             };
             Teacher teacher;
             var result = await UserManager.CreateAsync(myUser, model.Password);

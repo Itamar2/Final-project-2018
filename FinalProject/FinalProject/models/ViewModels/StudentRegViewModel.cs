@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,5 +22,6 @@ namespace FinalProject.Models.ViewModels
         public int Price { get; set; }
         public int TeachRanking { get; set; }
         public int NumOfStud { get; set; }
+        public IFormFile Pic { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,5 +22,6 @@ namespace FinalProject.Models.ViewModels
         public int Distance { get; set; }
         public int StudentRanking { get; set; }
         public string AboutMe { get; set; }
+        public IFormFile Pic { get; set; }
     }
 }
