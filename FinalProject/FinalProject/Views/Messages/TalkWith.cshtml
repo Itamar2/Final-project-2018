@@ -1,4 +1,4 @@
-﻿@model List<FinalProject.Models.ApplicationUser>
+﻿@model FinalProject.Models.ViewModels.MessagesContactsViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!----------------------------------------------------------------------Control Panel Navigation Links -->
 <div id="navCPanel" class="section brown lighten-5">
@@ -47,13 +47,13 @@
             <!------------------------------------------------------------------Student List-->
             <div class="studentsList col s12 l4">
                 <ul style="position: relative; top:-15px;">
-                    @if (Model == null)
+                    @if (Model.Contacts == null)
                     {
                         <p>Error</p>
                     }
                     else
                     {
-                        @foreach (var user in Model)
+                        @foreach (var user in Model.Contacts)
                         {
                             <li class="row studentCardHeight grey lighten-4 studentListItem" style="height:42px;">
                                 <div class="col s3 studentCardHeight">
@@ -73,69 +73,18 @@
             <div class="col s12 l8" style="margin-bottom:0px;">
                 <div style="">
                     <ul style="position: relative; max-height:450px; overflow-x:hidden; overflow-y:visible;">
-                        <li class="row" style="margin-bottom:0px;">
-                            <div class="col s12">
-                                <p>
-                                    <b>Sagi Liba - 17:52 PM</b>
-                                    <br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                </p>
-                            </div>
-                        </li>
-                        <li class="row" style="margin-bottom:0px;">
-                            <div class="col s12">
-                                <p>
-                                    <b>Sagi Liba - 17:52 PM</b>
-                                    <br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                </p>
-                            </div>
-                        </li>
-                        <li class="row" style="margin-bottom:0px;">
-                            <div class="col s12">
-                                <p>
-                                    <b>Sagi Liba - 17:52 PM</b>
-                                    <br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                </p>
-                            </div>
-                        </li>
-                        <li class="row" style="margin-bottom:0px;">
-                            <div class="col s12">
-                                <p>
-                                    <b>Sagi Liba - 17:52 PM</b>
-                                    <br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                </p>
-                            </div>
-                        </li>
-                        <li class="row" style="margin-bottom:0px;">
-                            <div class="col s12">
-                                <p>
-                                    <b>Sagi Liba - 17:52 PM</b>
-                                    <br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                </p>
-                            </div>
-                        </li>
-                        <li class="row" style="margin-bottom:0px;">
-                            <div class="col s12">
-                                <p>
-                                    <b>Sagi Liba - 17:52 PM</b>
-                                    <br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                                </p>
-                            </div>
-                        </li>
+                        @foreach (var msg in Model.Messages)
+                        {
+                            <li class="row" style="margin-bottom:0px;">
+                                <div class="col s12">
+                                    <p>
+                                        <b>Sagi Liba - 17:52 PM</b>
+                                        <br />
+                                        @msg.Content
+                                    </p>
+                                </div>
+                            </li>
+                        }
                     </ul>
                     <div class="row">
                         <div class="input-field col s12">

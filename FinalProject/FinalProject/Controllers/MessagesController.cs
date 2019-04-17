@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinalProject.data;
 using FinalProject.Models;
+using FinalProject.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class MessagesController : Controller
     {
         UserManager<ApplicationUser> UserManager;
@@ -35,7 +36,7 @@ namespace FinalProject.Controllers
             string UserName = User.Identity.Name;
             ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
 
-            /* Message msg = new Message()
+            Message msg = new Message()
             {
                 Date = DateTime.Now,
                 Content = message,
@@ -43,24 +44,34 @@ namespace FinalProject.Controllers
                 SenderId = MyUser.Id,
                 IsRead = false
             };
-           */
-            //AppDbContext.Messages.Add(msg);
+
+            AppDbContext.Messages.Add(msg);
             AppDbContext.SaveChanges();
             return "1";
         }
 
+        [HttpGet]
         public async Task<IActionResult> Conversations()
         {
             //getting the current logged in user
             string UserName = User.Identity.Name;
             ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
-            var messages = AppDbContext.Messages
-                .Where(x => x.RecId == MyUser.Id || x.SenderId == MyUser.Id)
-                .GroupBy(x => new {x.RecId, x.SenderId});
-            
-            return View();
-        }
+            List<ApplicationUser> myList = AppDbContext.Messages.GetContacts(MyUser.Id);
 
+            return View(myList);
+        }
+        public async Task<IActionResult> TalkWith(string id)
+        {
+            //getting the current logged in user
+            string UserName = User.Identity.Name;
+            ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
+            var msgs = AppDbContext.Messages.getMessages(MyUser.Id, id);
+            var vm = new MessagesContactsViewModel
+            {
+                Messages = msgs
+            };
+            return View(vm);
+        }
         public string a()
         {
             return "blah blah blah";

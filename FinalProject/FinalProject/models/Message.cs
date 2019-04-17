@@ -20,5 +20,11 @@ namespace FinalProject.Models
         public string RecId { get; set; }
         public bool IsRead { get; set; }
         public string Content { get; set; }
+
+        public override string ToString()
+        {
+            return Id + Date.ToString() + SenderId.ToString() + RecId.ToString() + IsRead + Content;
+        }
     }
+
 }
