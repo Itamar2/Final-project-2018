@@ -13,7 +13,7 @@ namespace FinalProject.data
      **/
     public static class MessageQueries
     {
-        public static List<ApplicationUser> GetContacts(this IQueryable<Message> Messages,string myId)
+        public static IQueryable<MessageGroup> GetContacts(this IQueryable<Message> Messages,string myId)
         {
 
             var result =
@@ -24,29 +24,12 @@ namespace FinalProject.data
                     resultSelector: (key, msgs) => new MessageGroup
                     {
                         OtherUser = key,
-                        Date = msgs.OrderByDescending(m => m.Date).First().Date
+                        Date = msgs.OrderByDescending(m => m.Date).First().Date,
+                        numOfUnreadMsgs = msgs.numOfNewMsgsSpecUser(myId, key.Id)
                     }
-                    )
-                    .Select(g => g.OtherUser);
+                    );
 
-            return result.ToList();
-            //var result =
-            //    Messages
-            //    .Where(m => m.SenderId == myId || m.RecId == myId)
-            //    .GroupBy
-            //    (
-            //        keySelector: m => (m.SenderId == myId) ? m.Recv : m.Sender,
-            //        resultSelector: (key, msgs) => new MessageGroup
-            //        {
-            //            OtherUser = key,
-            //            Recent = msgs.OrderByDescending(m => m.Date).First().Date
-            //        },
-            //        comparer: new MessageComparer()
-            //    )
-            //    .OrderBy(g => g.Recent)
-            //    .Select(g => g.OtherUser);
-
-            //return result.ToList();
+            return result;
         }
 
         public static List<Message> getMessages(this IQueryable<Message> Messages,string myId,string otherId)
@@ -63,6 +46,28 @@ namespace FinalProject.data
                 .Where(m => (m.RecId == myId) && (m.IsRead == false))
                 .Count();
             return num;
+        }
+
+        public static int numOfNewMsgsSpecUser(this IEnumerable<Message> Messages,string myId,string otherId)
+        {
+            int num = Messages
+                .Where(m => (m.RecId == myId) && (m.SenderId == otherId) && (m.IsRead == false))
+                .Count();
+            return num;
+        }
+
+        public static void UpdateMsgsToBeSeen(this ApplicationDbContext AppDbContext, List<Message> msgs,string myId)
+        {
+            foreach (var msg in msgs)
+            {
+                if(msg.RecId == myId && msg.IsRead == false)
+                {
+                    msg.IsRead = true;
+                    AppDbContext.Update(msg);
+                }
+
+            }
+            AppDbContext.SaveChanges();
         }
     }
 }
@@ -88,3 +93,22 @@ namespace FinalProject.data
 //        .OrderBy(g => g.Recent)
 //        .Select(g => g.OtherUser)
 //        .ToList();
+
+
+//var result =
+//    Messages
+//    .Where(m => m.SenderId == myId || m.RecId == myId)
+//    .GroupBy
+//    (
+//        keySelector: m => (m.SenderId == myId) ? m.Recv : m.Sender,
+//        resultSelector: (key, msgs) => new MessageGroup
+//        {
+//            OtherUser = key,
+//            Recent = msgs.OrderByDescending(m => m.Date).First().Date
+//        },
+//        comparer: new MessageComparer()
+//    )
+//    .OrderBy(g => g.Recent)
+//    .Select(g => g.OtherUser);
+
+//return result.ToList();

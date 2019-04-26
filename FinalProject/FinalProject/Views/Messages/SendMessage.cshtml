@@ -1,11 +1,12 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@model FinalProject.Models.ViewModels.MessagesContactsViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
 <form asp-controller="Messages" asp-action="SendMessage" method="post">
     <div class="row">
         <div class="input-field col s12">
-            @*<input type="hidden" value="@ViewBag.RecId" name="id"/>*@
-            <textarea id="textarea1" class="materialize-textarea" name="message"></textarea>
+            <input type="hidden" asp-for="OtherId" value="@ViewBag.RecId"/>
+            <textarea id="textarea1" asp-for="Message"class="materialize-textarea"></textarea>
             <label for="textarea1">Write a message:</label>
             <div class="center-align">
                 <input type="submit" value="Send" />

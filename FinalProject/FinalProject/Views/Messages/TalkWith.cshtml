@@ -47,21 +47,21 @@
             <!------------------------------------------------------------------Student List-->
             <div class="studentsList col s12 l4">
                 <ul style="position: relative; top:-15px;">
-                    @if (Model.Contacts == null)
+                    @if (Model.MsgGroup == null)
                     {
-                        <p>Error</p>
+                        <p>No Contacts Yet</p>
                     }
                     else
                     {
-                        @foreach (var user in Model.Contacts)
+                        @foreach (var item in Model.MsgGroup)
                         {
                             <li class="row studentCardHeight grey lighten-4 studentListItem" style="height:42px;">
                                 <div class="col s3 studentCardHeight">
-                                    <img src="~/images/person.jpg" alt="" class="studentCardImg">
+                                    <img src="~/@item.OtherUser.PicPath" alt="" class="studentCardImg">
                                 </div>
                                 <div class="col s9 studentCardHeight">
-                                    <span class="new badge" style="position:relative; left:0px;top:20px;">4</span>
-                                    <a asp-controller="Messages" asp-action="TalkWith" asp-route-Id="@user.Id" class="studentCardText">@(user.FirstName + " " + user.LastName)</a>
+                                    <span class="new badge" style="position:relative; left:0px;top:20px;">@item.numOfUnreadMsgs</span>
+                                    <a asp-controller="Messages" asp-action="TalkWith" asp-route-Id="@item.OtherUser.Id" class="studentCardText">@(item.OtherUser.FirstName + " " + item.OtherUser.LastName)</a>
                                 </div>
                                 <div class="col s12 grey lighten-1"></div>
                             </li>
@@ -73,27 +73,37 @@
             <div class="col s12 l8" style="margin-bottom:0px;">
                 <div style="">
                     <ul style="position: relative; max-height:450px; overflow-x:hidden; overflow-y:visible;">
-                        @foreach (var msg in Model.Messages)
+                        @if (Model.OtherId != null)
                         {
-                            <li class="row" style="margin-bottom:0px;">
-                                <div class="col s12">
-                                    <p>
-                                        <b>Sagi Liba - 17:52 PM</b>
-                                        <br />
-                                        @msg.Content
-                                    </p>
-                                </div>
-                            </li>
+                            @foreach (var msg in Model.Messages)
+                            {
+                                <li class="row" style="margin-bottom:0px;">
+                                    <div class="col s12">
+                                        <p>
+                                            <b>@(msg.Sender.FirstName + " " + msg.Sender.LastName)- @msg.Date.ToString()</b>
+                                            <br />
+                                            @msg.Content
+                                        </p>
+                                    </div>
+                                </li>
+                            }
                         }
                     </ul>
                     <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="textarea1" class="materialize-textarea"></textarea>
-                            <label for="textarea1">Write a message:</label>
-                            <div class="center-align">
-                                <a class="waves-effect waves-light btn">Send</a>
-                            </div>
-                        </div>
+                        @if (Model.OtherId != null)
+                        {
+                            <form asp-controller="Messages" asp-action="SendMessage">
+                                <div class="input-field col s12">
+
+                                    <textarea id="textarea1" asp-for="Message" class="materialize-textarea"></textarea>
+                                    <input type="hidden" value="@Model.OtherId" asp-for="OtherId" />
+                                    <label for="textarea1">Write a message:</label>
+                                    <div class="center-align">
+                                        <input type="submit" class="waves-effect waves-light btn" />
+                                    </div>
+                            </form>
+                        }
+                    </div>
                     </div>
                 </div>
             </div> <!--end right column-->

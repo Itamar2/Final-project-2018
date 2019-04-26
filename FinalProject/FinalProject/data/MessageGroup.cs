@@ -10,5 +10,6 @@ namespace FinalProject.data
     {
         public ApplicationUser OtherUser { get; set; }
         public DateTime Date { get; set; }
+        public int numOfUnreadMsgs { get; set; }
     }
 }

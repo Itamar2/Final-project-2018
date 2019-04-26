@@ -30,16 +30,15 @@ namespace FinalProject.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<string> SendMessage(string id, string message)
+        public async Task<IActionResult> SendMessage(MessagesContactsViewModel model)
         {
-            ApplicationUser OtherUser = await UserManager.FindByIdAsync(id);
-            string UserName = User.Identity.Name;
-            ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
+            ApplicationUser OtherUser = await UserManager.FindByIdAsync(model.OtherId);
+            ApplicationUser MyUser = await getCurrentUser();
 
             Message msg = new Message()
             {
                 Date = DateTime.Now,
-                Content = message,
+                Content = model.Message,
                 RecId = OtherUser.Id,
                 SenderId = MyUser.Id,
                 IsRead = false
@@ -47,34 +46,60 @@ namespace FinalProject.Controllers
 
             AppDbContext.Messages.Add(msg);
             AppDbContext.SaveChanges();
-            return "1";
+            return RedirectToAction("TalkWith", new { id = msg.RecId});
         }
 
         [HttpGet]
         public async Task<IActionResult> Conversations()
         {
-            //getting the current logged in user
-            string UserName = User.Identity.Name;
-            ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
-            List<ApplicationUser> myList = AppDbContext.Messages.GetContacts(MyUser.Id);
+            ApplicationUser MyUser = await getCurrentUser();
+            var myList = AppDbContext.Messages.GetContacts(MyUser.Id);
 
             return View(myList);
         }
         public async Task<IActionResult> TalkWith(string id)
         {
-            //getting the current logged in user
-            string UserName = User.Identity.Name;
-            ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
-            var msgs = AppDbContext.Messages.getMessages(MyUser.Id, id);
+
+            ApplicationUser MyUser = await getCurrentUser();
+            var Contacts = AppDbContext.Messages.GetContacts(MyUser.Id); //getting contacts the user talked to
+
+            List<Message> msgs = null;
+
+            if(id != null)
+            {
+                msgs = AppDbContext.Messages.getMessages(MyUser.Id, id); //getting the messages with a specific user.
+                AppDbContext.UpdateMsgsToBeSeen(msgs,MyUser.Id); //update the messages to be already watched
+            }
+            var vm = new MessagesContactsViewModel
+            {
+                MsgGroup = Contacts,
+                Messages = msgs,
+                OtherId = id
+            };
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TalkWith(MessagesContactsViewModel model)
+        {
+            ApplicationUser MyUser = await getCurrentUser();
+            var msgs = AppDbContext.Messages.getMessages(MyUser.Id, model.OtherId);
             var vm = new MessagesContactsViewModel
             {
                 Messages = msgs
             };
             return View(vm);
         }
-        public string a()
+
+        /*
+         * This Method return the current Logged-in User.
+         **/
+        private async Task<ApplicationUser> getCurrentUser()
         {
-            return "blah blah blah";
+            //getting the current logged in user
+            string UserName = User.Identity.Name;
+            ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
+            return MyUser;
         }
     }
 }
