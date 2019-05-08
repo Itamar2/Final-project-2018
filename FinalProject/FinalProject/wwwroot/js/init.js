@@ -139,7 +139,7 @@
 
     $(".calendarTaken").click(function(){
       console.log("Taken: "+$(this).parent().attr("date") +" "+ ($(this).text()).split(" ").join(""));
-    });
+      });
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space

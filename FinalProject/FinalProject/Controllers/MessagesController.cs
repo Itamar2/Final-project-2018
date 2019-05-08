@@ -49,14 +49,6 @@ namespace FinalProject.Controllers
             return RedirectToAction("TalkWith", new { id = msg.RecId});
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Conversations()
-        {
-            ApplicationUser MyUser = await getCurrentUser();
-            var myList = AppDbContext.Messages.GetContacts(MyUser.Id);
-
-            return View(myList);
-        }
         public async Task<IActionResult> TalkWith(string id)
         {
 

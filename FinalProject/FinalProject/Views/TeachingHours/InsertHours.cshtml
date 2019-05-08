@@ -1,9 +1,5 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/shared/_Layout.cshtml";
-}
-
+﻿@model FinalProject.Models.ViewModels.InsertHoursViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!----------------------------------------------------------------------Control Panel Navigation Links -->
 <div id="navCPanel" class="section brown lighten-5">
     <div class="container" style="padding-bottom:15px;">
@@ -15,8 +11,8 @@
                     </a>
                 </div>
                 <div class="col l4 m6 s12 center-align" style="margin-top:10px;">
-                    <a asp-controller="Messages" asp-action="TalkWith" class="brown-text text-darken-4" style="font-size:20px;">
-                        <i class="material-icons left small">mail_outline</i>Messages(@ViewBag.numOfNewMsgs+)
+                    <a href="#" class="brown-text text-darken-4" style="font-size:20px;">
+                        <i class="material-icons left small">mail_outline</i>Messages
                     </a>
                 </div>
                 <div class="col l4 m6 s12 center-align" style="margin-top:10px;">
@@ -44,4 +40,18 @@
     </div>
 </div>
 
+<form asp-controller="TeachingHours" asp-action="InsertHours">
 
+
+    <input type="hidden" id ="NumOfRows"value="@Model.NumOfRows"/>
+    <input type="hidden" id="IsDone" value="False" />
+    @for (int i = 0; i < Model.NumOfRows; i++)
+    {
+        <input type="date" asp-for="@Model.Date" />
+        <input type="time" asp-for="@Model.AvailList[i].StartHour" />
+        <input type="time" asp-for="@Model.AvailList[i].FinishHour" />
+    }
+
+    <input type="button" id="AddHours"value="+"/>
+    <input type="submit" value="Save" />
+</form>
