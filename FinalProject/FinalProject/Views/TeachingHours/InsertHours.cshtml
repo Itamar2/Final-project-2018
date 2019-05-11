@@ -40,18 +40,25 @@
     </div>
 </div>
 
-<form asp-controller="TeachingHours" asp-action="InsertHours">
+<form id="HoursForm" asp-controller="TeachingHours" asp-action="InsertHours">
 
 
-    <input type="hidden" id ="NumOfRows"value="@Model.NumOfRows"/>
-    <input type="hidden" id="IsDone" value="False" />
+    <input type="hidden" asp-for="NumOfRows"/>
+    <input type="hidden" id="IsDone" asp-for="IsDone" />
     @for (int i = 0; i < Model.NumOfRows; i++)
     {
-        <input type="date" asp-for="@Model.Date" />
+        <input type="date" asp-for="@Model.AvailList[i].Date" />
         <input type="time" asp-for="@Model.AvailList[i].StartHour" />
         <input type="time" asp-for="@Model.AvailList[i].FinishHour" />
     }
 
-    <input type="button" id="AddHours"value="+"/>
+    <input type="button" onclick="moreFields()" id="AddHours"value="+"/>
     <input type="submit" value="Save" />
 </form>
+
+<script>
+    function moreFields() {
+        document.getElementById("IsDone").value = "False";
+        document.getElementById("HoursForm").submit();
+    }
+</script>

@@ -10,6 +10,12 @@ namespace FinalProject.Models.ViewModels
         public int NumOfRows{ get; set; }
         public bool IsDone { get; set; }
         public List<AvailHours> AvailList { get; set; }
+
+        public InsertHoursViewModel()
+        {
+            NumOfRows = 1;
+            IsDone = true;
+        }
     }
 
     public class AvailHours

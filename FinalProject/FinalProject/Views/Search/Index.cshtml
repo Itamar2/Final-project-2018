@@ -156,7 +156,7 @@
                 </div>
                 <div class="col m4 l3 push-l6 push-m4 s6">
                     <div class="right">
-                        <a href="#" id="download-button" class="btn-small left teal lighten-1">Book a Lesson</a>
+                        <a asp-controller="BookLesson" asp-action="AvailableLessons" asp-route-Teacher="@teacher.AppUser.Id" id="download-button" class="btn-small left teal lighten-1">Book a Lesson</a>
                     </div>
                 </div>
             </div>
