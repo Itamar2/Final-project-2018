@@ -58,6 +58,28 @@ namespace FinalProject.data
                 .ToList();
             return myList;
         }
+        /**
+         * This Extension Method returns a list of a specific Teacher future lessons.
+         * Id - Teacher's Id in the Db.
+         */
+        public static List<Schedule> GetTeacherFutureLessons(this ApplicationDbContext AppDbContext,string Id)
+        {
+            List<Schedule> myLessons = AppDbContext.Schedules
+                .Where(s => s.TeacherId == Id)
+                .ToList();
+            return myLessons; 
+        }
+        /**
+         * This Extension Method returns a list of a specific Student future lessons.
+         * Id - Student Id in the Db.
+         */
+        public static List<Schedule> GetStudentFutureLessons(this ApplicationDbContext AppDbContext,string Id)
+        {
+            List<Schedule> myLessons = AppDbContext.Schedules
+                .Where(s => s.StudentId == Id)
+                .ToList();
+            return myLessons;
+        }
     }
 
 }
