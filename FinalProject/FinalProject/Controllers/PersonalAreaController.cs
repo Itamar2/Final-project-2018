@@ -32,5 +32,30 @@ namespace FinalProject.Controllers
             ViewBag.numOfNewMsgs = num;
             return View();
         }
+
+        public async Task<IActionResult> FutureLessons()
+        {
+            ApplicationUser myUser = await getCurrentUser();
+            List<Schedule> myLessons = AppDbContext.getFutureLessons(myUser.Id);
+            return View();
+        }
+
+        public async Task<IActionResult> HistoryLessons()
+        {
+            ApplicationUser myUser = await getCurrentUser();
+            List<Schedule> myLessons = AppDbContext.getHistoryLessons(myUser.Id);
+            return View();
+        }
+
+        /*
+ * This Method return the current Logged-in User.
+ **/
+        private async Task<ApplicationUser> getCurrentUser()
+        {
+            //getting the current logged in user
+            string UserName = User.Identity.Name;
+            ApplicationUser MyUser = await UserManager.FindByNameAsync(UserName);
+            return MyUser;
+        }
     }
 }

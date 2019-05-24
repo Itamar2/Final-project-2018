@@ -1,0 +1,13 @@
+﻿@model List<FinalProject.Models.Schedule>
+@{
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+
+<ul>
+    @foreach (var Lesson in Model)
+    {
+        <li>Date: @Lesson.Date.ToString()</li>
+        <li>Teacher: @(Lesson.Teacher.FirstName + " " + Lesson.Teacher.LastName)</li>
+        <li>Student: @(Lesson.Student.FirstName + " " + Lesson.Student.LastName)</li>
+    }
+</ul>

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace FinalProject.data
 {
+    /**
+     * This Class adds extension methods to ApplicationDbContext object which add
+     * queries about schedules in our website.
+     */ 
     public static class ScheduleQueries
     {
         public static void InsertLessons(this ApplicationDbContext AppDbContext,List<AvailHours> Lessons,string Id)
@@ -58,6 +62,50 @@ namespace FinalProject.data
                 .ToList();
             return myList;
         }
+
+        /**
+         * This extension method returns a list of future lessons a student or teacher have.
+         * Id - the Id of the requested teacher or student.
+         */
+        public static List<SchedGroup> getFutureLessons(this ApplicationDbContext AppDbContext,string id,bool future)
+        {
+            DateTime myTime = DateTime.Now;
+
+            IQueryable<Schedule> lessons;
+
+           if (future) // the user wants lessons that haven't happened yet.
+            {
+                lessons = AppDbContext.Schedules
+                .Where(s => (s.TeacherId == id || s.StudentId == id) && s.Start >= myTime && s.IsTaken == true);
+            }
+            else // the user wants lessons that already took place.
+            {
+                lessons = AppDbContext.Schedules
+                .Where(s => (s.TeacherId == id || s.StudentId == id) && s.Start < myTime && s.IsTaken == true);
+            }
+            
+            List<SchedGroup> myLessons = lessons
+                .GroupBy
+                (
+                keySelector: s => s.Start.Date, // group lessons by the start date ignoring hours.
+                elementSelector: s => s, // leave each element as it is right now.
+                resultSelector: (myKey, Scheds) => new SchedGroup() //each group in the list will be in this form.
+                {
+                    Key = myKey, // the date that our group is based on.
+                    Schedules = Scheds.OrderBy(s => s.Start) // elements in the group.
+                }
+                )
+                .OrderBy(g => g.Key)
+                .ToList();
+            return myLessons;
+        }
+    }
+
+
+    public class SchedGroup
+    {
+        public DateTime Key { get; set; } //the date that the group is based on.
+        public IEnumerable<Schedule> Schedules { get; set; } // the lessons that accurs in that date.
     }
 
 }

@@ -54,12 +54,14 @@
                 <div class="row">
                     <div class="col l12 m12 s12">
                         <form asp-controller="Account" asp-action="LogIn" class="right">
+                            <label>
+                                <input type="checkbox" name="RemeberMe"checked="checked" />
+                                <span>Remember Me</span>
+                            </label>&nbsp;&nbsp;
                             User Name:
                             <input type="text" name="UserName" class="browser-default myinput" />
                             Password:
                             <input type="password" name="Password" class="browser-default myinput" />
-                            Remember Me:
-                            <input type="checkbox" name="RememberMe" class="browser-default myinput" /> <br />
                             <input type="submit" name="submitLogin" class="btn-small" value="Login" style="margin-bottom:5px;" />
                         </form>
                     </div>
@@ -78,6 +80,12 @@
                         <div class="col s12">
                             Password:
                             <input type="password" name="password" class="browser-default myinputSmall" style="margin-bottom:10px;" />
+                        </div>
+                        <div class="col s12">
+                            <label>
+                                <input type="checkbox" checked="checked" />
+                                <span color="black">Remember Me</span>
+                            </label>&nbsp;&nbsp;
                         </div>
                         <div class="col s12 center-align">
                             <input type="submit" name="submitLogin" class="btn-small" value="Login" style="margin-bottom:5px;" />

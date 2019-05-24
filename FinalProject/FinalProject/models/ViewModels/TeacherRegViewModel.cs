@@ -23,5 +23,6 @@ namespace FinalProject.Models.ViewModels
         public int StudentRanking { get; set; }
         public string AboutMe { get; set; }
         public IFormFile Pic { get; set; }
+        public string[] Options { get; set; }
     }
 }

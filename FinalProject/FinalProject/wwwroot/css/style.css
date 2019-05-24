@@ -67,12 +67,14 @@ footer.page-footer {
   background-color: grey;
 }
 
+
 .loginSection {
-  height: 60px;
+    height: 60px;
+    display: flex;
 }
 
 .loginSectionSmall {
-  height: 200px;
+    height: 220px;
 }
 
 .myinput {
@@ -232,4 +234,9 @@ footer.page-footer {
 .calendarTaken {
   background-color: #e65100;
   cursor:pointer;
+}
+
+
+[type="checkbox"] + span:not(.lever) {
+    color: black;
 }
